@@ -31,7 +31,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         
         sut.load { _ in }
         sut.load { _ in }
-
+        
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
@@ -93,6 +93,20 @@ class RemoteFeedLoaderTests: XCTestCase {
     
     // MARK: - Helpers
     
+    private func makeSUT(url: URL = URL(string: "https://a-url.com")!, file: StaticString = #filePath, line: UInt = #line) -> (sut: RemoteFeedLoader, client: HTTPClientSpy) {
+        let client = HTTPClientSpy()
+        let sut = RemoteFeedLoader(url: url, client: client)
+        trackForMemoryLeaks(sut)
+        trackForMemoryLeaks(client)
+        return (sut, client)
+    }
+    
+    func trackForMemoryLeaks(_ instance: AnyObject?, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
+        }
+    }
+    
     private func expect(_ sut: RemoteFeedLoader, toCompleteWithResult result: RemoteFeedLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         var capturedResults = [RemoteFeedLoader.Result]()
         sut.load { capturedResults.append($0) }
@@ -118,12 +132,6 @@ class RemoteFeedLoaderTests: XCTestCase {
     private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
         let json = ["items": items]
         return try! JSONSerialization.data(withJSONObject: json)
-    }
-    
-    private func makeSUT(url: URL = URL(string: "https://a-url.com")!) -> (sut: RemoteFeedLoader, client: HTTPClientSpy) {
-        let client = HTTPClientSpy()
-        let sut = RemoteFeedLoader(url: url, client: client)
-        return (sut, client)
     }
     
     private class HTTPClientSpy: HTTPClient {
