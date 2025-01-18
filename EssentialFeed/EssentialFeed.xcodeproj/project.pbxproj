@@ -55,12 +55,19 @@
 			);
 			target = 080EDEF021B6DA7E00813479 /* EssentialFeed */;
 		};
+		296EA1262D3C5B350047192A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"XCTestCase+MemoryLeakTracking.swift",
+			);
+			target = 296EA11A2D3C3CFB0047192A /* EssentialFeedAPIEndToEndTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2908265C2D2C7A1000EFD03B /* Feed API */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2908265F2D2C7A2800EFD03B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Feed API"; sourceTree = "<group>"; };
 		296EA11C2D3C3CFB0047192A /* EssentialFeedAPIEndToEndTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeedAPIEndToEndTests; sourceTree = "<group>"; };
-		297CEDB92D33FB2900759E59 /* Helpers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Helpers; sourceTree = "<group>"; };
+		297CEDB92D33FB2900759E59 /* Helpers */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (296EA1262D3C5B350047192A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Helpers; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
